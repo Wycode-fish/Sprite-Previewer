@@ -1,0 +1,55 @@
+      body {
+        background-image: url("../images/scene.jpg");
+      }
+
+      .too-bar-header {
+        margin: 20px;
+        margin-left: 40px;
+	color: white;
+      }
+
+      .tool-bar {
+        float: left;
+        display: inline-block;
+        margin: 10px;
+        //border: 5px dotted grey;
+        border-radius: 10px;
+        padding: 1px;
+        width: 20%;
+      }
+
+      .tool-bar-divs {
+        margin: 20px;
+        background: #2F4F4F;
+        padding: 5px;
+        border-radius: 10px;
+      }
+
+
+      .show-zone {
+        float: left;
+        //clear: left;
+        display: inline-block;
+        margin: 30px;
+        border: 5px solid #696969;
+        //border-radius: 20px;
+      }
+
+      .thumb {
+        padding: 10px;
+      }
+
+
+      .post-processing {
+        float:left;
+        display: inline-block;
+        margin: 10px;
+        //border: 5px dotted grey;
+        border-radius: 10px;
+        padding: 1px;
+        width: 20%;
+      }
+
+      .modal-body {
+        overflow-x: scroll;
+      }

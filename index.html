@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
+
+    <link rel="stylesheet" href="./res/css/styles.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- p5 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.js"></script>
+    <script language="javascript" type="text/javascript" src="./lib/p5.dom.js"></script>
+
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <!-- sketch.js-->
+    <script src="sketch.js"></script>
+
+  </head>
+
+
+
+
+  <body>
+    <h1 class="too-bar-header"> SPRITE PREVIEWER </h1>
+    <!-- Tool Bar -->
+    <div class="tool-bar">
+
+      <!-- UPLOAD FILES -->
+      <div class="upload-div tool-bar-divs">
+
+        <form id="form1" runat="server">
+          <div class="input-group mb-3">
+            <div class="custom-file">
+              <input type="file" class="custom-file-input upload-file" id="inputGroupFile01" onchange="readURL(this)">
+              <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+            </div>
+          </div>
+          <img class="thumb" src="#" alt="thumb" />
+        </form>
+
+      </div>
+
+
+      <!-- SELECT FRAMES -->
+      <div class="select-frame-div tool-bar-divs">
+        <button type="button" class="select-frame-button btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="initFrameList()">
+          Select Frames
+        </button>
+      </div>
+
+
+      <!-- SAVE FRAMES -->
+      <div class="save-frame-div tool-bar-divs">
+        <Button class="save-frame-button btn btn-primary" onclick="saveFrames()">Save Frames</Button>
+      </div>
+
+
+    </div>
+    <!--END Tool Bar-->
+
+
+
+    <!-- CANVAS ZONE-->
+    <div class="show-zone" id="canvas-container"></div>
+
+
+
+    <!-- POST PROCESSING -->
+    <div class="post-processing">
+
+      <!-- INPUT FOR SPRITE SIZE -->
+      <div class="sprite-size-div tool-bar-divs">
+
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Unit Size</span>
+          </div>
+          <input type="text" class="form-control sprite-size-input" placeholder="e.g 32" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+
+        <Button class="sprite-size-button btn btn-primary" onclick="getSpriteSize()">confirm</Button>
+      </div>
+
+
+      <!-- FRAME RATE CONTROL -->
+      <div class="frame-rate-div tool-bar-divs">
+
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon2">FPS</span>
+          </div>
+          <input type="text" class="form-control fps-input" placeholder="e.g 32" aria-label="Username" aria-describedby="basic-addon2">
+        </div>
+
+        <Button class="fps-button btn btn-primary" onclick="setFPS()">confirm</Button>
+      </div>
+
+
+      <!-- FRAME RATE CONTROL -->
+      <div class="bkg-color-div tool-bar-divs">
+
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon3">BKG color</span>
+          </div>
+          <input type="text" class="form-control bkg-color-input" placeholder="e.g #12345" aria-label="Username" aria-describedby="basic-addon2">
+        </div>
+
+        <Button class="bkg-color-button btn btn-primary" onclick="setBkgColor()">confirm</Button>
+        <Button class="bkg-color-reset-button btn btn-primary" onclick="resetBkgColor()">reset</Button>
+      </div>
+
+      <!-- SELECT FOR PREVIEW SIZE -->
+      <div class="preview-size-div tool-bar-divs">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <label class="input-group-text" for="inputGroupSelect01">Preview Size</label>
+          </div>
+          <select class="preview-size-select custom-select" id="inputGroupSelect01">
+            <!-- <option selected>choose</option> -->
+            <option value="10">10x</option>
+            <option value="9">9x</option>
+            <option value="8">8x</option>
+            <option value="7">7x</option>
+            <option value="6">6x</option>
+            <option value="5">5x</option>
+            <option value="4">4x</option>
+            <option value="3">3x</option>
+            <option value="2">2x</option>
+            <option value="1">1x</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+    <!-- MODAL -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Select Units</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="clearFrames()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+
+          <div id="frame-list" class="modal-body">
+          </div>
+
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="clearFrames()">Close</button>
+            <button type="button" class="btn btn-primary" onclick="submitSelected()">Save changes</button>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+
+
+  </body>
+</html>
