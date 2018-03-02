@@ -279,5 +279,5 @@ function setBkgColor () {
 }
 
 function resetBkgColor () {
-	bkgColor = '#FFFFFF';
+	bkgColor = '#00000050';
 }
